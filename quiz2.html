@@ -49,6 +49,7 @@
       box-shadow: 0 0 10px #ff1a1a44;
       cursor: pointer;
       transition: transform 0.2s;
+      user-select: none;
     }
 
     .opcao:hover {
@@ -60,27 +61,7 @@
       font-weight: bold;
     }
 
-    .botao {
-      margin-top: 40px;
-      background: linear-gradient(45deg, #ff1a1a, #cc0000);
-      color: white;
-      padding: 16px;
-      border: none;
-      border-radius: 12px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      cursor: pointer;
-      animation: piscar 1.5s infinite;
-      box-shadow: 0 0 15px #ff1a1a88;
-      width: 100%;
-      max-width: 460px;
-    }
-
-    @keyframes piscar {
-      0% { opacity: 1; }
-      50% { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
+    /* Remove botão continuar */
   </style>
 </head>
 <body>
@@ -89,34 +70,26 @@
     <p>O senhor já tem algum dos seguintes produtos em casa?</p>
 
     <div class="opcoes">
-      <div class="opcao" onclick="responder('Não, nunca tive')">
+      <div class="opcao" onclick="responderEAvancar('Não, nunca tive')">
         <span>❌ Não, nunca tive</span>
       </div>
-      <div class="opcao" onclick="responder('Sim, mas já não funciona')">
+      <div class="opcao" onclick="responderEAvancar('Sim, mas já não funciona')">
         <span>⚠️ Sim, mas já não funciona</span>
       </div>
-      <div class="opcao" onclick="responder('Sim, mas está muito velho')">
+      <div class="opcao" onclick="responderEAvancar('Sim, mas está muito velho')">
         <span>📦 Sim, mas está muito velho</span>
       </div>
     </div>
-
-    <button class="botao" onclick="irProxima()">✅ Continuar</button>
   </div>
 
   <script>
-    function responder(resposta) {
+    function responderEAvancar(resposta) {
       localStorage.setItem("resposta1", resposta);
+      // Redireciona imediatamente para quiz3.html
+      window.location.href = "quiz3.html";
     }
 
-    function irProxima() {
-      if (localStorage.getItem("resposta1")) {
-        window.location.href = "quiz3.html";
-      } else {
-        alert("Por favor, selecciona uma das opções.");
-      }
-    }
-
-    // Scroll automático após 3 segundos
+    // Scroll automático após 3 segundos (se quiser manter, mas pode remover)
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('conteudo').scrollIntoView({ behavior: 'smooth' });
