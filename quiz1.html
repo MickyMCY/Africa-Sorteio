@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escolhe o Teu Prémio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0 20px;
+      background: #0d0d0d;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      padding-top: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #ff3c3c;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #e0e0e0;
+      margin-bottom: 30px;
+    }
+
+    .opcoes {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .item {
+      background: #1a1a1a;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #ff1a1a40;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .item:hover {
+      transform: scale(1.03);
+    }
+
+    .item img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .item span {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎁 Escolhe o Teu Prémio Favorito</h1>
+    <p>Clica no que desejas ganhar agora:</p>
+
+    <div class="opcoes">
+      <div class="item" onclick="escolher('Congelador')">
+        <img src="img/congelador.jpg" alt="Congelador" />
+        <span>❄️ Congelador</span>
+      </div>
+
+      <div class="item" onclick="escolher('TV Smart 42')">
+        <img src="img/tvsmart.jpg" alt="TV Smart 42" />
+        <span>📺 TV Smart 42”</span>
+      </div>
+
+      <div class="item" onclick="escolher('Geleira Vertical')">
+        <img src="img/geleira.jpg" alt="Geleira Vertical" />
+        <span>🧊 Geleira Vertical</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function escolher(premio) {
+      localStorage.setItem("premioEscolhido", premio);
+      window.location.href = "quiz2.html";
+    }
+  </script>
+</body>
+</html>
