@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pergunta 3</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0 20px;
+      background: #0d0d0d;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      padding-top: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      color: #ff3c3c;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #ddd;
+      margin-bottom: 25px;
+    }
+
+    .opcoes-imagens {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .opcao-img {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 0 10px #ff1a1a44;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .opcao-img:hover {
+      transform: scale(1.03);
+    }
+
+    .opcao-img img {
+      width: 100%;
+      border-radius: 10px;
+      max-height: 180px;
+      object-fit: cover;
+    }
+
+    .opcao-img span {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .botao {
+      margin-top: 40px;
+      background: linear-gradient(45deg, #ff1a1a, #cc0000);
+      color: white;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      animation: piscar 1.5s infinite;
+      box-shadow: 0 0 15px #ff1a1a88;
+      width: 100%;
+      max-width: 460px;
+    }
+
+    @keyframes piscar {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="conteudo">
+    <h1>🎁 Pergunta 3</h1>
+    <p>Qual destes produtos ajudaria mais no teu dia-a-dia?</p>
+
+    <div class="opcoes-imagens">
+      <div class="opcao-img" onclick="responder('Geleira')">
+        <img src="img/geleira.jpg" alt="Geleira">
+        <span>Geleira</span>
+      </div>
+
+      <div class="opcao-img" onclick="responder('Congelador')">
+        <img src="img/congelador.jpg" alt="Congelador">
+        <span>Congelador</span>
+      </div>
+
+      <div class="opcao-img" onclick="responder('TV Smart 42”')">
+        <img src="img/tvsmart.jpg" alt="TV Smart">
+        <span>TV Smart 42”</span>
+      </div>
+    </div>
+
+    <button class="botao" onclick="irProxima()">✅ Continuar</button>
+  </div>
+
+  <script>
+    function responder(resposta) {
+      localStorage.setItem("resposta3", resposta);
+    }
+
+    function irProxima() {
+      if (localStorage.getItem("resposta3")) {
+        window.location.href = "quiz5.html";
+      } else {
+        alert("Por favor, selecciona uma das opções.");
+      }
+    }
+
+    // Scroll automático
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('conteudo').scrollIntoView({ behavior: 'smooth' });
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
