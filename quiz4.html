@@ -49,6 +49,7 @@
       box-shadow: 0 0 10px #ff1a1a44;
       cursor: pointer;
       transition: transform 0.2s;
+      user-select: none;
     }
 
     .opcao-img:hover {
@@ -69,28 +70,6 @@
       font-size: 1.1rem;
       color: #fff;
     }
-
-    .botao {
-      margin-top: 40px;
-      background: linear-gradient(45deg, #ff1a1a, #cc0000);
-      color: white;
-      padding: 16px;
-      border: none;
-      border-radius: 12px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      cursor: pointer;
-      animation: piscar 1.5s infinite;
-      box-shadow: 0 0 15px #ff1a1a88;
-      width: 100%;
-      max-width: 460px;
-    }
-
-    @keyframes piscar {
-      0% { opacity: 1; }
-      50% { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
   </style>
 </head>
 <body>
@@ -99,39 +78,30 @@
     <p>Qual destes produtos ajudaria mais no teu dia-a-dia?</p>
 
     <div class="opcoes-imagens">
-      <div class="opcao-img" onclick="responder('Geleira')">
+      <div class="opcao-img" onclick="responderEAvancar('Geleira')">
         <img src="img/geleira.jpg" alt="Geleira">
         <span>Geleira</span>
       </div>
 
-      <div class="opcao-img" onclick="responder('Congelador')">
+      <div class="opcao-img" onclick="responderEAvancar('Congelador')">
         <img src="img/congelador.jpg" alt="Congelador">
         <span>Congelador</span>
       </div>
 
-      <div class="opcao-img" onclick="responder('TV Smart 42”')">
+      <div class="opcao-img" onclick="responderEAvancar('TV Smart 42”')">
         <img src="img/tvsmart.jpg" alt="TV Smart">
         <span>TV Smart 42”</span>
       </div>
     </div>
-
-    <button class="botao" onclick="irProxima()">✅ Continuar</button>
   </div>
 
   <script>
-    function responder(resposta) {
+    function responderEAvancar(resposta) {
       localStorage.setItem("resposta3", resposta);
+      window.location.href = "quiz5.html";
     }
 
-    function irProxima() {
-      if (localStorage.getItem("resposta3")) {
-        window.location.href = "quiz5.html";
-      } else {
-        alert("Por favor, selecciona uma das opções.");
-      }
-    }
-
-    // Scroll automático
+    // Scroll automático (mantive caso queira)
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('conteudo').scrollIntoView({ behavior: 'smooth' });
