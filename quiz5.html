@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pergunta 4</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0 20px;
+      background: #0d0d0d;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      padding-top: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      color: #ff3c3c;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #ddd;
+      margin-bottom: 25px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      border: none;
+      background: #1e1e1e;
+      color: #fff;
+      margin-bottom: 30px;
+      box-shadow: 0 0 10px #ff1a1a33;
+    }
+
+    .botao {
+      background: linear-gradient(45deg, #ff1a1a, #cc0000);
+      color: white;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      animation: piscar 1.5s infinite;
+      box-shadow: 0 0 15px #ff1a1a88;
+      width: 100%;
+      max-width: 460px;
+    }
+
+    @keyframes piscar {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="conteudo">
+    <h1>📍 Pergunta 4</h1>
+    <p>Em que bairro ou zona está a viver actualmente?</p>
+
+    <input type="text" id="localizacao" placeholder="Ex: Matola, Mafalala, Polana, etc." />
+
+    <button class="botao" onclick="irProxima()">✅ Continuar</button>
+  </div>
+
+  <script>
+    function irProxima() {
+      const local = document.getElementById('localizacao').value.trim();
+      if (local.length < 3) {
+        alert("Por favor, indique a sua localização correctamente.");
+        return;
+      }
+
+      localStorage.setItem("localizacao", local);
+      window.location.href = "quiz6.html";
+    }
+
+    // Scroll automático
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('conteudo').scrollIntoView({ behavior: 'smooth' });
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
