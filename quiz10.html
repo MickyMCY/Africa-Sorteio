@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Processar Respostas...</title>
   <style>
     body {
@@ -59,10 +59,12 @@
 
     .imagem-premio {
       width: 100%;
-      max-width: 280px;
+      max-width: 240px;
+      aspect-ratio: 1/1;
       border-radius: 12px;
       margin: 20px auto;
       box-shadow: 0 0 15px #00ff8888;
+      object-fit: cover;
     }
 
     .mensagem {
@@ -118,7 +120,7 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="conteudo">
     <div class="processando">
       ⏳ Estamos a processar as tuas respostas<span class="dots"></span>
     </div>
@@ -164,12 +166,13 @@
     document.getElementById('zonaClienteSpan').textContent = zona;
     document.getElementById('contactoClienteSpan').textContent = contacto;
 
-    // Mostrar resultado com efeito de suspense
+    // Mostrar resultado com efeito de suspense + scroll após 3 segundos
     setTimeout(() => {
       document.querySelector('.processando').style.display = 'none';
-      document.getElementById('resultado').style.display = 'block';
-      document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
-    }, 4000);
+      const resultado = document.getElementById('resultado');
+      resultado.style.display = 'block';
+      resultado.scrollIntoView({ behavior: 'smooth' });
+    }, 3000);
   </script>
 </body>
 </html>
