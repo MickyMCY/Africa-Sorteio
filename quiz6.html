@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pergunta 5</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0 20px;
+      background: #0d0d0d;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      padding-top: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      color: #ff3c3c;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #ddd;
+      margin-bottom: 30px;
+    }
+
+    .opcao {
+      background: #1a1a1a;
+      color: #fff;
+      border: 2px solid #ff1a1a66;
+      padding: 16px;
+      margin: 12px 0;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 12px #ff1a1a33;
+    }
+
+    .opcao:hover {
+      background-color: #ff1a1a;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="conteudo">
+    <h1>❤️ Pergunta 5</h1>
+    <p>Qual é o seu estado civil actual?</p>
+
+    <div class="opcao" onclick="responder('Solteiro')">Solteiro</div>
+    <div class="opcao" onclick="responder('Casado')">Casado</div>
+    <div class="opcao" onclick="responder('Vive em União')">Vive em União</div>
+  </div>
+
+  <script>
+    function responder(resposta) {
+      localStorage.setItem("estadoCivil", resposta);
+      window.location.href = "quiz7.html";
+    }
+
+    // Scroll automático após carregar a página
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('conteudo').scrollIntoView({ behavior: 'smooth' });
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
