@@ -40,17 +40,22 @@
     }
 
     .video-container {
-      width: 100%;
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
       margin: 30px 0;
       border-radius: 12px;
-      overflow: hidden;
       box-shadow: 0 0 15px #ff3c3c55;
     }
 
-    .video-container video {
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: auto;
-      display: block;
+      height: 100%;
+      border: none;
       border-radius: 12px;
     }
 
@@ -83,7 +88,6 @@
       50% { transform: scale(1.07); }
       100% { transform: scale(1); }
     }
-
   </style>
 </head>
 <body>
@@ -92,9 +96,14 @@
   </div>
 
   <div class="container">
-    <!-- VÍDEO LOCAL -->
+    <!-- VÍDEO YOUTUBE INCORPORADO -->
     <div class="video-container">
-      <video src="video.mp4" controls autoplay muted playsinline></video>
+      <iframe 
+        id="youtubeVideo"
+        src="https://www.youtube.com/embed/Wj2Odjw-YmY?autoplay=1&mute=1&playsinline=1&enablejsapi=1"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      ></iframe>
     </div>
 
     <!-- TEXTO INFORMATIVO -->
@@ -105,7 +114,38 @@
     </p>
 
     <!-- BOTÃO -->
-    <a href="quiz1.html" class="botao">🎁 Sim, quero ganhar agora!</a>
+    <a href="quiz1.html" class="botao" id="botaoScroll">🎁 Sim, quero ganhar agora!</a>
   </div>
+
+  <script>
+    // Scroll automático até ao botão
+    function scrollAteBotao() {
+      document.getElementById('botaoScroll').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Esperar 2 segundos para garantir carregamento do iframe
+    setTimeout(() => {
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.body.appendChild(tag);
+    }, 2000);
+
+    // Criar player e escutar evento 'ended'
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('youtubeVideo', {
+        events: {
+          'onStateChange': function (event) {
+            if (event.data === YT.PlayerState.ENDED) {
+              scrollAteBotao();
+            }
+          }
+        }
+      });
+    }
+
+    // Backup caso não funcione o evento (ex: vídeo muito curto)
+    setTimeout(scrollAteBotao, 60000); // 60 segundos
+  </script>
 </body>
 </html>
