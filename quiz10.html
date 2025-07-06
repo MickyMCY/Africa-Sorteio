@@ -2,8 +2,8 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Processar Respostas...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pergunta 2</title>
   <style>
     body {
       margin: 0;
@@ -11,177 +11,88 @@
       background: #0d0d0d;
       color: #fff;
       font-family: Arial, sans-serif;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
 
     .container {
       max-width: 480px;
-      margin: auto;
-      padding-top: 60px;
-    }
-
-    .processando {
-      font-size: 1.4rem;
-      color: #ff4d4d;
-      margin-bottom: 40px;
-    }
-
-    .dots::after {
-      content: '';
-      display: inline-block;
-      width: 1ch;
-      animation: pontinhos 1.5s steps(4, end) infinite;
-    }
-
-    @keyframes pontinhos {
-      0% { content: ''; }
-      25% { content: '.'; }
-      50% { content: '..'; }
-      75% { content: '...'; }
-      100% { content: ''; }
-    }
-
-    .resultado {
-      display: none;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      width: 100%;
+      padding-top: 40px;
+      text-align: center;
     }
 
     h1 {
-      font-size: 1.9rem;
-      color: #33ff66;
+      font-size: 1.6rem;
+      color: #ff3c3c;
       margin-bottom: 10px;
     }
 
-    .imagem-premio {
-      width: 100%;
-      max-width: 240px;
-      aspect-ratio: 1/1;
-      border-radius: 12px;
-      margin: 20px auto;
-      box-shadow: 0 0 15px #00ff8888;
-      object-fit: cover;
-    }
-
-    .mensagem {
-      background: #1a1a1a;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 12px #00ff8855;
-      margin-bottom: 30px;
-      text-align: left;
+    p {
       font-size: 1.1rem;
-      line-height: 1.6;
+      color: #ddd;
+      margin-bottom: 25px;
     }
 
-    .mensagem strong {
-      color: #33ff66;
+    .bloco-opcao {
+      margin-bottom: 30px;
     }
 
-    .botao-melhorado {
-      display: block;
-      margin: 30px auto;
-      padding: 16px 24px;
-      background: linear-gradient(45deg, #00e676, #00c853);
-      color: white;
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: none;
-      border: none;
-      border-radius: 14px;
-      box-shadow: 0 0 12px #00ff8899;
-      cursor: pointer;
-      animation: piscar 1.8s infinite;
-      max-width: 440px;
+    .imagem-opcao {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ff1a1a66;
+      margin-bottom: 10px;
+    }
+
+    .botao-opcao {
       width: 100%;
-    }
-
-    @keyframes piscar {
-      0% { opacity: 1; }
-      50% { opacity: 0.6; }
-      100% { opacity: 1; }
-    }
-
-    .aviso {
-      background: #ff3333;
-      color: white;
       padding: 16px;
-      border-radius: 10px;
-      font-weight: bold;
       font-size: 1rem;
-      margin-top: 20px;
-      box-shadow: 0 0 10px #ff3333aa;
+      background-color: #1a1a1a;
+      border: 2px solid #ff3c3c;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .botao-opcao:hover {
+      background-color: #2a2a2a;
     }
   </style>
 </head>
 <body>
-  <div class="container" id="conteudo">
-    <div class="processando">
-      ⏳ Estamos a processar as tuas respostas<span class="dots"></span>
+  <div class="container">
+    <h1>🏠 Pergunta 2</h1>
+    <p>Como descreverias o estado da tua casa neste momento?</p>
+
+    <div class="bloco-opcao">
+      <img src="img/simples.jpg" alt="Casa simples" class="imagem-opcao" />
+      <button class="botao-opcao" onclick="responderEAvancar('Simples')">É simples, mas organizada</button>
     </div>
 
-    <div class="resultado" id="resultado">
-      <h1>🎉 Parabéns, <span id="nomeClienteSpan"></span>!</h1>
-      <img id="imgPremio" src="" alt="Produto Ganhado" class="imagem-premio">
+    <div class="bloco-opcao">
+      <img src="img/melhorias.jpg" alt="Precisa de melhorias" class="imagem-opcao" />
+      <button class="botao-opcao" onclick="responderEAvancar('Melhorias')">Precisa de algumas melhorias</button>
+    </div>
 
-      <div class="mensagem">
-        <p>Foste seleccionado pela campanha <strong>Moçambique em Concerto</strong> para receber <strong>um Electrodoméstico Gratuito</strong> (imagem acima), como parte da nossa distribuição nacional.</p>
-
-        <p>A nossa equipa da <strong>TV Sucesso</strong> irá entrar em contacto contigo através do número: <strong><span id="contactoClienteSpan"></span></strong>, para confirmar a entrega na tua localização: <strong><span id="zonaClienteSpan"></span></strong>.</p>
-
-        <p>O teu produto será enviado por transportadora, acompanhado pela nossa equipa.</p>
-
-        <p><strong>A entrega será feita em até <span style="color:#33ff66;">24 horas</span>.</strong></p>
-
-        <p>Agora depende apenas de ti.</p>
-
-        <p>Para garantirmos a entrega, a encomenda será processada assim que for paga a <strong style="color:#33ff66;">taxa única de transporte</strong> referente à entrega.</p>
-      </div>
-
-      <div class="aviso">
-        <span id="nomeClienteSpan2"></span>, tens <strong>24 horas</strong> para confirmar a tua encomenda.<br>
-        Caso contrário, o teu prémio poderá ser automaticamente cancelado.
-      </div>
-
-      <a href="https://venduspay.com/checkout.html?id=1014" class="botao-melhorado">
-        ✅ PAGAR TAXA DE ENTREGA AGORA
-      </a>
+    <div class="bloco-opcao">
+      <img src="img/dificuldades.jpg" alt="Dificuldades" class="imagem-opcao" />
+      <button class="botao-opcao" onclick="responderEAvancar('Dificuldades')">Tenho dificuldades no dia a dia</button>
     </div>
   </div>
 
   <script>
-    // Recuperar dados
-    const nome = localStorage.getItem('nomeCliente') || "Cliente";
-    const zona = localStorage.getItem('zonaCliente') || "Zona não definida";
-    const contacto = localStorage.getItem('contactoCliente') || "Sem contacto";
-    const resposta = localStorage.getItem('resposta3') || "";
-
-    // Definir imagem com base na escolha
-    const imgMap = {
-      "Geleira": "img/geleira.jpg",
-      "Congelador": "img/congelador.jpg",
-      "TV Smart 42”": "img/tvsmart.jpg"
-    };
-    const imgSrc = imgMap[resposta] || "img/premio.jpg";
-
-    document.getElementById('imgPremio').src = imgSrc;
-    document.getElementById('nomeClienteSpan').textContent = nome;
-    document.getElementById('nomeClienteSpan2').textContent = nome;
-    document.getElementById('zonaClienteSpan').textContent = zona;
-    document.getElementById('contactoClienteSpan').textContent = contacto;
-
-    // Mostrar resultado com efeito e scroll
-    setTimeout(() => {
-      document.querySelector('.processando').style.display = 'none';
-      const resultado = document.getElementById('resultado');
-      resultado.style.display = 'block';
-      resultado.scrollIntoView({ behavior: 'smooth' });
-    }, 3000);
+    function responderEAvancar(resposta) {
+      localStorage.setItem("resposta2", resposta);
+      window.location.href = "quiz3.html";
+    }
   </script>
 </body>
 </html>
