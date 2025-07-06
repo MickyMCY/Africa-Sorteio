@@ -33,7 +33,22 @@
     p {
       font-size: 1.1rem;
       color: #ddd;
+      margin-bottom: 20px;
+    }
+
+    .imagens-produtos {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
       margin-bottom: 30px;
+    }
+
+    .imagens-produtos img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #ff1a1a33;
     }
 
     .opcoes {
@@ -60,8 +75,6 @@
       font-size: 1.2rem;
       font-weight: bold;
     }
-
-    /* Remove botão continuar */
   </style>
 </head>
 <body>
@@ -69,6 +82,14 @@
     <h1>📝 Pergunta 1</h1>
     <p>O senhor já tem algum dos seguintes produtos em casa?</p>
 
+    <!-- Imagens dos produtos -->
+    <div class="imagens-produtos">
+      <img src="img/geleira.jpg" alt="Geleira">
+      <img src="img/congelador.jpg" alt="Congelador">
+      <img src="img/tvsmart.jpg" alt="TV Smart">
+    </div>
+
+    <!-- Opções de resposta -->
     <div class="opcoes">
       <div class="opcao" onclick="responderEAvancar('Não, nunca tive')">
         <span>❌ Não, nunca tive</span>
@@ -85,11 +106,10 @@
   <script>
     function responderEAvancar(resposta) {
       localStorage.setItem("resposta1", resposta);
-      // Redireciona imediatamente para quiz3.html
       window.location.href = "quiz3.html";
     }
 
-    // Scroll automático após 3 segundos (se quiser manter, mas pode remover)
+    // Scroll automático após 3 segundos
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('conteudo').scrollIntoView({ behavior: 'smooth' });
