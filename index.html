@@ -41,22 +41,21 @@
 
     .video-container {
       position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
       margin: 30px 0;
       border-radius: 12px;
+      overflow: hidden;
       box-shadow: 0 0 15px #ff3c3c55;
     }
 
-    .video-container iframe {
+    iframe {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       border: none;
-      border-radius: 12px;
+      top: 0;
+      left: 0;
     }
 
     p {
@@ -96,11 +95,11 @@
   </div>
 
   <div class="container">
-    <!-- VÍDEO YOUTUBE INCORPORADO -->
+    <!-- VÍDEO YouTube com som -->
     <div class="video-container">
-      <iframe 
+      <iframe
         id="youtubeVideo"
-        src="https://www.youtube.com/embed/Wj2Odjw-YmY?autoplay=1&mute=1&playsinline=1&enablejsapi=1"
+        src="https://www.youtube.com/embed/Wj2Odjw-YmY?autoplay=1&playsinline=1&enablejsapi=1"
         allow="autoplay; encrypted-media"
         allowfullscreen
       ></iframe>
@@ -114,38 +113,37 @@
     </p>
 
     <!-- BOTÃO -->
-    <a href="quiz1.html" class="botao" id="botaoScroll">🎁 Sim, quero ganhar agora!</a>
+    <a href="quiz1.html" id="botaoPremio" class="botao">🎁 Sim, quero ganhar agora!</a>
   </div>
 
   <script>
-    // Scroll automático até ao botão
-    function scrollAteBotao() {
-      document.getElementById('botaoScroll').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Esperar 2 segundos para garantir carregamento do iframe
-    setTimeout(() => {
-      const tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.appendChild(tag);
-    }, 2000);
-
-    // Criar player e escutar evento 'ended'
-    let player;
+    // Scroll automático para o botão quando o vídeo acabar
     function onYouTubeIframeAPIReady() {
-      player = new YT.Player('youtubeVideo', {
+      const player = new YT.Player('youtubeVideo', {
         events: {
-          'onStateChange': function (event) {
+          'onStateChange': function(event) {
             if (event.data === YT.PlayerState.ENDED) {
-              scrollAteBotao();
+              document.getElementById('botaoPremio').scrollIntoView({ behavior: 'smooth' });
             }
           }
         }
       });
     }
 
-    // Backup caso não funcione o evento (ex: vídeo muito curto)
-    setTimeout(scrollAteBotao, 60000); // 60 segundos
+    // Carregar API do YouTube para controlar o vídeo
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
+
+    // Scroll automático após 2 segundos (caso não tenha tocado no vídeo)
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const iframe = document.getElementById('youtubeVideo');
+        if (!iframe) return;
+        // Tenta ativar autoplay (não funciona com som ativado por padrão em mobile)
+        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+      }, 2000);
+    });
   </script>
 </body>
 </html>
