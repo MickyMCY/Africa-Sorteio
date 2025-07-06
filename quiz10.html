@@ -7,7 +7,6 @@
   <style>
     body {
       margin: 0;
-      padding: 0 20px;
       background: #0d0d0d;
       color: #fff;
       font-family: Arial, sans-serif;
@@ -17,7 +16,7 @@
     .container {
       max-width: 480px;
       margin: auto;
-      padding-top: 60px;
+      padding: 60px 20px 20px 20px;
     }
 
     .processando {
@@ -84,7 +83,7 @@
 
     .botao-melhorado {
       display: block;
-      margin: 30px auto;
+      margin: 30px auto 0 auto;
       padding: 16px 24px;
       background: linear-gradient(45deg, #00e676, #00c853);
       color: white;
@@ -97,8 +96,8 @@
       box-shadow: 0 0 12px #00ff8899;
       cursor: pointer;
       animation: piscar 1.8s infinite;
-      max-width: 440px;
       width: 100%;
+      max-width: 440px;
     }
 
     @keyframes piscar {
@@ -161,7 +160,7 @@
     const contacto = localStorage.getItem('contactoCliente') || "Sem contacto";
     const resposta = localStorage.getItem('resposta3') || "";
 
-    // Definir imagem com base na escolha
+    // Mapear imagem ao produto
     const imgMap = {
       "Geleira": "img/geleira.jpg",
       "Congelador": "img/congelador.jpg",
@@ -169,13 +168,14 @@
     };
     const imgSrc = imgMap[resposta] || "img/premio.jpg";
 
+    // Preencher conteúdo dinâmico
     document.getElementById('imgPremio').src = imgSrc;
     document.getElementById('nomeClienteSpan').textContent = nome;
     document.getElementById('nomeClienteSpan2').textContent = nome;
     document.getElementById('zonaClienteSpan').textContent = zona;
     document.getElementById('contactoClienteSpan').textContent = contacto;
 
-    // Mostrar resultado com efeito e scroll
+    // Mostrar resultado com scroll suave
     setTimeout(() => {
       document.querySelector('.processando').style.display = 'none';
       const resultado = document.getElementById('resultado');
