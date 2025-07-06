@@ -36,6 +36,20 @@
       margin-bottom: 20px;
     }
 
+    /* Estilo para o vídeo */
+    .video-container {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #ff1a1a44;
+    }
+
     .imagens-produtos {
       display: flex;
       justify-content: center;
@@ -80,6 +94,15 @@
 <body>
   <div class="container" id="conteudo">
     <h1>📝 Pergunta 1</h1>
+
+    <!-- Vídeo abaixo do título -->
+    <div class="video-container">
+      <video controls>
+        <source src="video.mp4" type="video/mp4" />
+        O teu navegador não suporta vídeo.
+      </video>
+    </div>
+
     <p>O senhor já tem algum dos seguintes produtos em casa?</p>
 
     <!-- Imagens dos produtos -->
