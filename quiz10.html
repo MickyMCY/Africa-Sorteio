@@ -4,6 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A Processar Respostas...</title>
+
+  <!-- ✅ Pixel da Meta (Facebook) -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){
+        n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2201646976984686');
+    fbq('track', 'ViewContent');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=2201646976984686&ev=PageView&noscript=1"/>
+  </noscript>
+
   <style>
     body {
       margin: 0;
@@ -59,7 +80,7 @@
     .imagem-premio {
       width: 100%;
       max-width: 240px;
-      aspect-ratio: 1/1;
+      aspect-ratio: 1 / 1;
       border-radius: 12px;
       margin: 20px auto;
       box-shadow: 0 0 15px #00ff8888;
@@ -96,8 +117,13 @@
       box-shadow: 0 0 12px #00ff8899;
       cursor: pointer;
       animation: piscar 1.8s infinite;
-      width: 100%;
+      width: 90%;
       max-width: 440px;
+      max-height: 60px;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     @keyframes piscar {
@@ -149,7 +175,7 @@
         Caso contrário, o teu prémio poderá ser automaticamente cancelado.
       </div>
 
-      <a href="https://venduspay.com/checkout.html?id=1014" class="botao-melhorado">
+      <a href="https://venduspay.com/checkout.html?id=1014" class="botao-melhorado" target="_blank" rel="noopener noreferrer">
         ✅ PAGAR TAXA DE ENTREGA AGORA
       </a>
     </div>
