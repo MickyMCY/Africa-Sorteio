@@ -4,6 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pergunta 6</title>
+
+  <!-- ✅ Pixel da Meta (Facebook) -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){
+        n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2201646976984686');
+    fbq('track', 'ViewContent');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=2201646976984686&ev=PageView&noscript=1"/>
+  </noscript>
+
   <style>
     body {
       margin: 0;
@@ -60,6 +81,9 @@
     .opcao img {
       max-width: 80px;
       margin-bottom: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .opcao span {
@@ -77,19 +101,19 @@
 
     <div class="opcoes">
       <div class="opcao" onclick="responder('1 pessoa')">
-        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="1 pessoa" />
+        <img loading="lazy" src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="1 pessoa" />
         <span>1 pessoa</span>
       </div>
       <div class="opcao" onclick="responder('2 a 3 pessoas')">
-        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="2-3 pessoas" />
+        <img loading="lazy" src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="2-3 pessoas" />
         <span>2 a 3 pessoas</span>
       </div>
       <div class="opcao" onclick="responder('4 a 5 pessoas')">
-        <img src="https://cdn-icons-png.flaticon.com/512/1256/1256650.png" alt="4-5 pessoas" />
+        <img loading="lazy" src="https://cdn-icons-png.flaticon.com/512/1256/1256650.png" alt="4-5 pessoas" />
         <span>4 a 5 pessoas</span>
       </div>
       <div class="opcao" onclick="responder('Mais de 6')">
-        <img src="https://cdn-icons-png.flaticon.com/512/3063/3063823.png" alt="6+" />
+        <img loading="lazy" src="https://cdn-icons-png.flaticon.com/512/3063/3063823.png" alt="6+" />
         <span>Mais de 6</span>
       </div>
     </div>
