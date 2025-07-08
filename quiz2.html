@@ -4,6 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pergunta 1</title>
+
+  <!-- ✅ Pixel da Meta (Facebook) -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){
+        n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2201646976984686');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=2201646976984686&ev=PageView&noscript=1"/>
+  </noscript>
+
   <style>
     body {
       margin: 0;
@@ -77,16 +98,17 @@
     }
   </style>
 </head>
-<body>
+
+<body style="visibility:hidden;" onload="document.body.style.visibility='visible'">
   <div class="container" id="conteudo">
     <h1>📝 Pergunta 1</h1>
     <p>O senhor já tem algum dos seguintes produtos em casa?</p>
 
     <!-- Imagens dos produtos -->
     <div class="imagens-produtos">
-      <img src="img/geleira.jpg" alt="Geleira">
-      <img src="img/congelador.jpg" alt="Congelador">
-      <img src="img/tvsmart.jpg" alt="TV Smart">
+      <img src="img/geleira.jpg" alt="Geleira" loading="lazy">
+      <img src="img/congelador.jpg" alt="Congelador" loading="lazy">
+      <img src="img/tvsmart.jpg" alt="TV Smart" loading="lazy">
     </div>
 
     <!-- Opções de resposta -->
